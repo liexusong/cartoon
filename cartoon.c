@@ -26,7 +26,7 @@
 #include "php.h"
 #include "php_ini.h"
 #include "ext/standard/info.h"
-#include "php_var.h"
+#include "ext/standard/php_var.h"
 #include "php_cartoon.h"
 
 #include <signal.h>
@@ -271,6 +271,7 @@ void sig_handler(int signo)
 
     get_backtrace(&retval TSRMLS_CC); /* get backtrace */
     save_backtrace(&retval TSRMLS_CC);
+    exit(signo);
 }
 
 PHP_MINIT_FUNCTION(cartoon)
