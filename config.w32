@@ -1,0 +1,13 @@
+// $Id$
+// vim:ft=javascript
+
+// If your extension references something external, use ARG_WITH
+// ARG_WITH("cartoon", "for cartoon support", "no");
+
+// Otherwise, use ARG_ENABLE
+// ARG_ENABLE("cartoon", "enable cartoon support", "no");
+
+if (PHP_CARTOON != "no") {
+	EXTENSION("cartoon", "cartoon.c");
+}
+
