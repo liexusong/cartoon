@@ -27,6 +27,7 @@
 #include "php_ini.h"
 #include "ext/standard/info.h"
 #include "ext/standard/php_var.h"
+#include "php_main.h"
 #include "php_cartoon.h"
 
 #include <signal.h>
@@ -238,9 +239,14 @@ void get_backtrace(zval *retval TSRMLS_DC)
 }
 
 
-void save_backtrace(zval *retval)
+void save_backtrace(zval *retval TSRMLS_DC)
 {
-    php_var_dump(&retval, 1 TSRMLS_DC);
+    smart_str buf = {0};
+
+    php_var_export_ex(&retval, 1, &buf TSRMLS_CC);
+    smart_str_0 (&buf);
+    php_log_err(buf.c TSRMLS_CC); /* save into log file */
+    smart_str_free(&buf);
 }
 
 
