@@ -48,7 +48,8 @@ PHP_INI_END()
 */
 /* }}} */
 
-static zval *debug_backtrace_get_args(void **curpos TSRMLS_DC)
+static zval *
+backtrace_fetch_args(void **curpos TSRMLS_DC)
 {
     void **p = curpos;
     zval *arg_array, **arg;
@@ -174,7 +175,7 @@ void get_backtrace(zval *retval TSRMLS_DC)
             if ((options & DEBUG_BACKTRACE_IGNORE_ARGS) == 0 &&
                 ((! ptr->opline) || ((ptr->opline->opcode == ZEND_DO_FCALL_BY_NAME) || (ptr->opline->opcode == ZEND_DO_FCALL)))) {
                 if (ptr->function_state.arguments) {
-                    add_assoc_zval_ex(stack_frame, "args", sizeof("args"), debug_backtrace_get_args(ptr->function_state.arguments TSRMLS_CC));
+                    add_assoc_zval_ex(stack_frame, "args", sizeof("args"), backtrace_fetch_args(ptr->function_state.arguments TSRMLS_CC));
                 }
             }
         } else {
@@ -330,7 +331,7 @@ PHP_MINFO_FUNCTION(cartoon)
 /* }}} */
 
 
-PHP_FUNCTION(cartoon_debug)
+PHP_FUNCTION(cartoon_coredump_debug)
 {
     char *ptr = (char *)0;
     *ptr = 1;
@@ -341,7 +342,7 @@ PHP_FUNCTION(cartoon_debug)
  * Every user visible function must have an entry in cartoon_functions[].
  */
 const zend_function_entry cartoon_functions[] = {
-	PHP_FE(cartoon_debug,	NULL)
+	PHP_FE(cartoon_coredump_debug,	NULL)
 	PHP_FE_END	/* Must be the last line in cartoon_functions[] */
 };
 /* }}} */
