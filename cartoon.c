@@ -28,6 +28,7 @@
 #include "ext/standard/info.h"
 #include "ext/standard/php_var.h"
 #include "php_main.h"
+#include "php_smart_str.h"
 #include "php_cartoon.h"
 
 #include <signal.h>
