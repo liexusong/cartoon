@@ -13,5 +13,4 @@ function test() {
 test();
 ```
 
-Result:
 ![Result](https://raw.githubusercontent.com/liexusong/cartoon/master/images/backtrace.png)
