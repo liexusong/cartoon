@@ -242,11 +242,11 @@ void get_backtrace(zval *retval TSRMLS_DC)
 
 void save_backtrace(zval *retval TSRMLS_DC)
 {
-#define LOG_TITLE "<cartoon> stack -> "
+#define CARTOON_LOG_PRE "<cartoon> STACK -> "
 
     smart_str buf = {0};
 
-    smart_str_appendl(&buf, LOG_TITLE, sizeof(LOG_TITLE) - 1);
+    smart_str_appendl(&buf, CARTOON_LOG_PRE, sizeof(CARTOON_LOG_PRE) - 1);
     php_var_export_ex(&retval, 1, &buf TSRMLS_CC);
     smart_str_0(&buf);
     php_log_err(buf.c TSRMLS_CC); /* save into log file */
