@@ -245,7 +245,7 @@ void save_backtrace(zval *retval TSRMLS_DC)
     smart_str buf = {0};
 
     php_var_export_ex(&retval, 1, &buf TSRMLS_CC);
-    smart_str_0 (&buf);
+    smart_str_0(&buf);
     php_log_err(buf.c TSRMLS_CC); /* save into log file */
     smart_str_free(&buf);
 }
